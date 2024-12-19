@@ -6,14 +6,17 @@ const alchemyUrl = 'https://eth-mainnet.g.alchemy.com/v2/GXjcLM0-xJacsmTje8MdIvW
 // Crear un proveedor usando la URL de Alchemy
 const provider = new ethers.JsonRpcProvider(alchemyUrl);
 
-// Obtener el número de bloque actual
-async function getBlockNumber() {
+// Indicar la cuenta de la que se quiere conocer el saldo
+const address = "0x742d35Cc6634C0532925a3b844Bc454e4438f44e";
+
+// Obtener el saldo de la cuenta
+async function getBalance() {
   try {
-    const blockNumber = await provider.getBlockNumber();
-    console.log("Número de bloque actual:", blockNumber);
+    const balance = await provider.getBalance(address);
+    console.log("Saldo de la cuenta:", ethers.formatEther(balance), "ETH");
   } catch (e) {
-    console.error("Error al obtener el número de bloque", e);
+    console.error("Error al obtener el saldo de la cuenta", e);
   }
 }
 
-getBlockNumber();
+getBalance();
